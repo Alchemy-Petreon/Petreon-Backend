@@ -2,6 +2,8 @@ const fs = require('fs');
 const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
+const User = require('../lib/models/User');
+const { agent } = require('superagent');
 
 describe('Petreon routes', () => {
   beforeEach(() => {
@@ -35,5 +37,17 @@ describe('Petreon routes', () => {
         });
       });
   });
+
+  it('returns all users', async() => {
+    await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
+    const agent = request.agent(app);
+    const users = await User
+      .find();
+
+    const res = await agent
+      .get('/api/v1/users')
+
+    expect(res.body).toEqual(users);
+  })
   
 });
