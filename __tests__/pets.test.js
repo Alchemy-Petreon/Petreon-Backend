@@ -1,0 +1,51 @@
+const fs = require('fs');
+const pool = require('../lib/utils/pool');
+const request = require('supertest');
+const app = require('../lib/app');
+const User = require('../lib/models/User');
+const Pet = require('../lib/models/Pet')
+const { agent } = require('superagent');
+
+describe('Petreon routes', () => {
+  beforeEach(() => {
+    return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
+  });
+
+  afterAll(() => {
+    return pool.end();
+  });
+
+  it('creates a pet', async() => {
+    const lassie = await User
+      .insert({
+        userName: 'lassie',
+        firstName: 'dave',
+        lastName: 'whatev',
+        profilePicture: 'hiho.jpg',
+        profileDescription: 'i like dogs'
+    })
+
+    return request(app)
+      .post('/api/v1/pets')
+      .send({
+          userId: `${lassie.id}`,
+          petName: 'dingo',
+          type: 'dog',
+          petProfilePicture: 'dingo.jpg',
+          petProfileDescription: 'dingo ate a baby',
+          bannerPicture: 'dingo2.jpg'
+      })
+      .then(res => {
+          expect(res.body).toEqual({
+            id: expect.any(String),
+            userId: '1',
+            petName: 'dingo',
+            accountCreated: expect.any(String),
+            type: 'dog',
+            petProfilePicture: 'dingo.jpg',
+            petProfileDescription: 'dingo ate a baby',
+            bannerPicture: 'dingo2.jpg'
+          })
+      })
+  })
+});
