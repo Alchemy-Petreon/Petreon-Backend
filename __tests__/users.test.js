@@ -48,6 +48,25 @@ describe('Petreon routes', () => {
       .get('/api/v1/users')
 
     expect(res.body).toEqual(users);
+  });
+
+  it('returns a user by id', async() => {
+    await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
+    const agent = request.agent(app);
+
+    const res = await agent
+      .get('/api/v1/users/2')
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      userName: 'dogbone',
+      firstName: 'wishbone',
+      lastName: 'archer',
+      creationDate: expect.any(String),
+      profilePicture: 'dog.jpg',
+      profileDescription: 'stuffstuffstuff',
+      likes: '0'
+    })
   })
   
 });
