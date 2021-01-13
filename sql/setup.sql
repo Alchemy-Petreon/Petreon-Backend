@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS pets CASCADE;
-DROP TABLE IF EXISTS subscriptions;
+DROP TABLE IF EXISTS subscriptions CASCADE;
+DROP TABLE IF EXISTS posts;
 
 CREATE TABLE users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -29,4 +30,14 @@ CREATE TABLE subscriptions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pet_id BIGINT REFERENCES pets(id),
     user_id BIGINT REFERENCES users(id)
+);
+
+CREATE TABLE posts (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    pet_id BIGINT REFERENCES pets(id),
+    post_time TIMESTAMP NOT NULL,
+    pic_url TEXT,
+    video_url TEXT,
+    post_text TEXT,
+    likes BIGINT
 );
