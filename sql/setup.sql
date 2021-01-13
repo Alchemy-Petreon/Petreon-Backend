@@ -11,7 +11,6 @@ CREATE TABLE users (
     account_created TIMESTAMP NOT NULL,
     profile_pic TEXT NOT NULL,
     profile_description TEXT NOT NULL,
-    access_token TEXT NOT NULL,
     likes BIGINT
 );
 
