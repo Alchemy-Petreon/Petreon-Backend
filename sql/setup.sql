@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS comments;
 
 CREATE TABLE users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username TEXT NOT NULL,
+    user_name TEXT NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE posts (
 CREATE TABLE comments (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id BIGINT REFERENCES users(id),
-    post_id BIGINT REFERENCES post(id),
+    post_id BIGINT REFERENCES posts(id),
     text TEXT NOT NULL,
     timestamp TIMESTAMP NOT NULL
 );
