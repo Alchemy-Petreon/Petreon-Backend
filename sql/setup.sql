@@ -10,7 +10,7 @@ CREATE TABLE users (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
-    profile_pic TEXT NOT NULL,
+    profile_picture TEXT NOT NULL,
     profile_description TEXT NOT NULL,
     likes BIGINT
 );
@@ -21,9 +21,9 @@ CREATE TABLE pets (
     pet_name TEXT NOT NULL,
     type TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
-    profile_pic TEXT NOT NULL,
+    profile_picture TEXT NOT NULL,
     profile_description TEXT NOT NULL,
-    banner_pic TEXT NOT NULL
+    banner_picture TEXT NOT NULL
 );
 
 CREATE TABLE subscriptions (
@@ -36,7 +36,7 @@ CREATE TABLE posts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pet_id BIGINT REFERENCES pets(id),
     post_time TIMESTAMP NOT NULL,
-    pic_url TEXT,
+    picture_url TEXT,
     video_url TEXT,
     post_text TEXT,
     likes BIGINT
