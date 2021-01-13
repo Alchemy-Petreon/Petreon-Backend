@@ -65,8 +65,8 @@ describe('Petreon routes', () => {
       creationDate: expect.any(String),
       profilePicture: 'dog.jpg',
       profileDescription: 'stuffstuffstuff',
-      likes: '0'
+      likes: '0',
+      pets: []
     })
   })
-  
 });
