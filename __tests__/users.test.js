@@ -14,7 +14,7 @@ describe('Petreon routes', () => {
     return pool.end();
   });
 
-  it('adds a user', async () => {
+  it('adds a user', async() => {
     return request(app)
       .post('/api/v1/users')
       .send({
@@ -38,7 +38,7 @@ describe('Petreon routes', () => {
       });
   });
 
-  it('returns all users', async () => {
+  it('returns all users', async() => {
     await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
     const agent = request.agent(app);
     const users = await User
@@ -50,7 +50,7 @@ describe('Petreon routes', () => {
     expect(res.body).toEqual(users);
   });
 
-  it('returns a user by id', async () => {
+  it('returns a user by id', async() => {
     await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
     const agent = request.agent(app);
 
@@ -69,5 +69,4 @@ describe('Petreon routes', () => {
       pets: []
     })
   })
-
 });
