@@ -7,8 +7,6 @@ CREATE TABLE users (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
-    subscriptions BIGINT REFERENCES users_pets(id)[],
-    pet BIGINT REFERENCES pets(id)[],
     profile_pic TEXT NOT NULL,
     profile_description TEXT NOT NULL,
     access_token TEXT NOT NULL,
@@ -17,12 +15,13 @@ CREATE TABLE users (
 
 CREATE TABLE IF EXISTS pets (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id BIGINT REFERENCES users(id),
     pet_name TEXT NOT NULL,
     type TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
     profile_pic TEXT NOT NULL,
     profile_description TEXT NOT NULL,
-    banner_pic TEXT NOT NULL,
-    posts BIGINT REFERENCES posts(id)
+    banner_pic TEXT NOT NULL
 );
+
 
