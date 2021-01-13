@@ -104,5 +104,34 @@ describe('Petreon routes', () => {
     });
   });
 
+  it('deletes a user', async() => {
+    const agent = request.agent(app);
+
+    const lassie = await User
+      .insert({
+        userName: 'lassie',
+        firstName: 'dave',
+        lastName: 'whatev',
+        profilePicture: 'hiho.jpg',
+        profileDescription: 'i like dogs'
+      })
+
+    return await agent
+      .delete(`/api/v1/users/${lassie.id}`)
+
+      .then(res => {
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          userName: 'lassie',
+          firstName: 'dave',
+          lastName: 'whatev',
+          creationDate: expect.any(String),
+          profilePicture: 'hiho.jpg',
+          profileDescription: 'i like dogs',
+          likes: '0'
+        })
+      })
+  })
+
 });
 
