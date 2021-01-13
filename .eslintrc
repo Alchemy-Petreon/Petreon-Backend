@@ -4,7 +4,9 @@
     "sourceType": "module",
     "requireConfigFile": false,
     "babelOptions": {
-      "plugins": ["@babel/plugin-syntax-class-properties"]
+      "plugins": [
+        "@babel/plugin-syntax-class-properties"
+      ]
     }
   },
   "parser": "@babel/eslint-parser",
@@ -42,10 +44,7 @@
       "always"
     ],
     "comma-spacing": "error",
-    "space-before-function-paren": [
-      "error",
-      "never"
-    ],
+    "space-before-function-paren": [],
     "eol-last": [
       "error",
       "always"
@@ -77,12 +76,21 @@
         }
       }
     ],
-    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
     "array-bracket-spacing": "error",
     "prefer-const": "error",
     "no-var": "error",
     "rest-spread-spacing": "error",
     "prefer-arrow-callback": "error",
-    "object-shorthand": ["error", "always"]
+    "object-shorthand": [
+      "error",
+      "always"
+    ]
   }
 }
