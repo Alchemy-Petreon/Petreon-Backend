@@ -65,8 +65,44 @@ describe('Petreon routes', () => {
       creationDate: expect.any(String),
       profilePicture: 'dog.jpg',
       profileDescription: 'stuffstuffstuff',
-      likes: '0'
+      likes: '0',
+      pets: []
     })
   })
-  
+
+  it('updates a user', async() => {
+    const agent = request.agent(app);
+
+    const lassie = await User
+      .insert({
+        userName: 'lassie',
+        firstName: 'dave',
+        lastName: 'whatev',
+        profilePicture: 'hiho.jpg',
+        profileDescription: 'i like dogs'
+      })
+
+    const res = await agent
+      .put(`/api/v1/users/${lassie.id}`)
+      .send({
+        userName: 'lassie',
+        firstName: 'dave',
+        lastName: 'whatev',
+        profilePicture: 'hiho.jpg',
+        profileDescription: 'i LOVE dogs'
+      })
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      userName: 'lassie',
+      firstName: 'dave',
+      lastName: 'whatev',
+      creationDate: expect.any(String),
+      profilePicture: 'hiho.jpg',
+      profileDescription: 'i LOVE dogs',
+      likes: '0'
+    });
+  });
+
 });
+
