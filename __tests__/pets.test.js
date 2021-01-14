@@ -60,4 +60,24 @@ describe('Petreon routes', () => {
 
     expect(res.body).toEqual(pets)
   })
+
+  it('returns a pet by id', async() => {
+    await pool.query(fs.readFileSync('./__tests__/petsTest.sql', 'utf-8'));
+    const agent = request.agent(app);
+
+    const res = await agent
+      .get('/api/v1/pets/1')
+
+    expect(res.body).toEqual({
+        id: expect.any(String),
+        userId: '1',
+        petName: 'gilgamesh',
+        type: 'cat',
+        accountCreated: expect.any(String),
+        petProfilePicture: 'gil.jpg',
+        petProfileDescription: 'demon cat',
+        bannerPicture: 'gil2.jpg',
+        posts: []
+    });
+  })
 });
