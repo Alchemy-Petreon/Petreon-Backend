@@ -68,4 +68,22 @@ describe('Petreon routes', () => {
     expect(res.body).toEqual(posts)
   });
 
+  it('returns a post by id', async() => {
+    await pool.query(fs.readFileSync('./__tests__/postsTest.sql', 'utf-8'));
+    const agent = request.agent(app);
+    const res = await agent
+        .get('/api/v1/posts/2')
+
+    expect(res.body).toEqual({
+        id: expect.any(String),
+        petId: '2',
+        postTime: expect.any(String),
+        pictureUrl: null,
+        videoUrl: 'mumubad.avi',
+        postText: 'mumu so bad',
+        likes: '0',
+        comments: []
+    });
+  });
+
 });
