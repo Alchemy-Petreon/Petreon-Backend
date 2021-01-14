@@ -120,6 +120,45 @@ describe('Petreon routes', () => {
           accountCreated: expect.any(String),petProfilePicture: 'bird.png',
           petProfileDescription: 'i am iron bird',
           bannerPicture: 'bird2.png'
-      })
-  })
+      });
+  });
+
+  it('deletes a pet', async() => {
+    const agent = request.agent(app);
+
+    const lassie = await User
+    .insert({
+      userName: 'lassie',
+      firstName: 'dave',
+      lastName: 'whatev',
+      profilePicture: 'hiho.jpg',
+      profileDescription: 'i like dogs'
+    })
+
+    const ed = await Pet
+    .create({
+      userId: `${lassie.id}`,
+      petName: 'edward',
+      type: 'bird',
+      petProfilePicture: 'birb.png',
+      petProfileDescription: 'i am iron birb',
+      bannerPicture: 'birb2.png'
+    })
+
+    return await agent
+      .delete(`/api/v1/pets/${ed.id}`)
+
+      .then(res => {
+          expect(res.body).toEqual({
+              id: expect.any(String),
+              userId: expect.any(String),
+              petName: 'edward',
+              type: 'bird',
+              accountCreated: expect.any(String),
+              petProfilePicture: 'birb.png',
+              petProfileDescription: 'i am iron birb',
+              bannerPicture: 'birb2.png'
+          });
+      });
+  });
 });
