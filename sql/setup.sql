@@ -8,7 +8,7 @@ CREATE TABLE users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_name TEXT NOT NULL,
     first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    email TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
     profile_picture TEXT NOT NULL,
     profile_description TEXT NOT NULL,
