@@ -14,13 +14,13 @@ describe('Petreon routes', () => {
     return pool.end();
   });
 
-  it('adds a user', async() => {
+  it('adds a user', async () => {
     return request(app)
       .post('/api/v1/users')
       .send({
         userName: 'KittenMittens',
         firstName: 'Jane',
-        lastName: 'Doe',
+        email: 'Doe',
         profilePicture: 'face.jpg',
         profileDescription: 'i like kittens in mittens'
       })
@@ -29,7 +29,7 @@ describe('Petreon routes', () => {
           id: expect.any(String),
           userName: 'KittenMittens',
           firstName: 'Jane',
-          lastName: 'Doe',
+          email: 'Doe',
           creationDate: expect.any(String),
           profilePicture: 'face.jpg',
           profileDescription: 'i like kittens in mittens',
@@ -38,7 +38,7 @@ describe('Petreon routes', () => {
       });
   });
 
-  it('returns all users', async() => {
+  it('returns all users', async () => {
     await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
     const agent = request.agent(app);
     const users = await User
@@ -50,7 +50,7 @@ describe('Petreon routes', () => {
     expect(res.body).toEqual(users);
   });
 
-  it('returns a user by id', async() => {
+  it('returns a user by id', async () => {
     await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
     const agent = request.agent(app);
 
@@ -61,7 +61,7 @@ describe('Petreon routes', () => {
       id: expect.any(String),
       userName: 'dogbone',
       firstName: 'wishbone',
-      lastName: 'archer',
+      email: 'archer',
       creationDate: expect.any(String),
       profilePicture: 'dog.jpg',
       profileDescription: 'stuffstuffstuff',
@@ -70,14 +70,14 @@ describe('Petreon routes', () => {
     })
   })
 
-  it('updates a user', async() => {
+  it('updates a user', async () => {
     const agent = request.agent(app);
 
     const lassie = await User
       .insert({
         userName: 'lassie',
         firstName: 'dave',
-        lastName: 'whatev',
+        email: 'whatev',
         profilePicture: 'hiho.jpg',
         profileDescription: 'i like dogs'
       })
@@ -87,7 +87,7 @@ describe('Petreon routes', () => {
       .send({
         userName: 'lassie',
         firstName: 'dave',
-        lastName: 'whatev',
+        email: 'whatev',
         profilePicture: 'hiho.jpg',
         profileDescription: 'i LOVE dogs'
       })
@@ -96,7 +96,7 @@ describe('Petreon routes', () => {
       id: expect.any(String),
       userName: 'lassie',
       firstName: 'dave',
-      lastName: 'whatev',
+      email: 'whatev',
       creationDate: expect.any(String),
       profilePicture: 'hiho.jpg',
       profileDescription: 'i LOVE dogs',
@@ -104,14 +104,14 @@ describe('Petreon routes', () => {
     });
   });
 
-  it('deletes a user', async() => {
+  it('deletes a user', async () => {
     const agent = request.agent(app);
 
     const lassie = await User
       .insert({
         userName: 'lassie',
         firstName: 'dave',
-        lastName: 'whatev',
+        email: 'whatev',
         profilePicture: 'hiho.jpg',
         profileDescription: 'i like dogs'
       })
@@ -124,7 +124,7 @@ describe('Petreon routes', () => {
           id: expect.any(String),
           userName: 'lassie',
           firstName: 'dave',
-          lastName: 'whatev',
+          email: 'whatev',
           creationDate: expect.any(String),
           profilePicture: 'hiho.jpg',
           profileDescription: 'i like dogs',
