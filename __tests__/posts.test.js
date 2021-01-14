@@ -3,7 +3,8 @@ const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
 const User = require('../lib/models/User');
-const Pet = require('../lib/models/Pet')
+const Pet = require('../lib/models/Pet');
+const Post = require('../lib/models/Post')
 const { agent } = require('superagent');
 
 describe('Petreon routes', () => {
@@ -54,5 +55,17 @@ describe('Petreon routes', () => {
           });
       });
   })
+
+  it('returns all posts', async() => {
+    await pool.query(fs.readFileSync('./__tests__/postsTest.sql', 'utf-8'));
+    const agent = request.agent(app);
+    const posts = await Post
+        .find();
+
+    const res = await agent
+        .get('/api/v1/posts')
+
+    expect(res.body).toEqual(posts)
+  });
 
 });
