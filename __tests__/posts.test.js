@@ -41,7 +41,7 @@ describe('Petreon routes', () => {
       .send({
           petId: `${dingo.id}`,
           pictureUrl: 'dingosocute.jpg',
-          postText: 'dingo so cute',
+          postText: 'dingo so cute'
       })
       .then(res => {
           expect(res.body).toEqual({
@@ -83,6 +83,53 @@ describe('Petreon routes', () => {
         postText: 'mumu so bad',
         likes: '0',
         comments: []
+    });
+  });
+
+  it('updates a post', async() => {
+    const agent = request.agent(app);
+
+    const lassie = await User
+    .insert({
+      userName: 'lassie',
+      firstName: 'dave',
+      lastName: 'whatev',
+      profilePicture: 'hiho.jpg',
+      profileDescription: 'i like dogs'
+    });
+
+    const ed = await Pet
+    .create({
+      userId: `${lassie.id}`,
+      petName: 'edward',
+      type: 'bird',
+      petProfilePicture: 'bird.png',
+      petProfileDescription: 'i am iron bird',
+      bannerPicture: 'bird2.png'
+    });
+
+    const edpic = await Post
+    .insert({
+        petId: `${ed.id}`,
+        pictureUrl: 'dingosocute.jpg',
+        postText: 'dingo so cute'
+    });
+
+    const res = await agent
+      .put(`/api/v1/posts/1`)
+      .send({
+          pictureUrl: 'edsocute.jpg',
+          postText: 'ed so cute'
+      });
+
+    expect(res.body).toEqual({
+        id: expect.any(String),
+        petId: expect.any(String),
+        postTime: expect.any(String),
+        pictureUrl: 'edsocute.jpg',
+        videoUrl: null,
+        postText: 'ed so cute',
+        likes: '0'
     });
   });
 
