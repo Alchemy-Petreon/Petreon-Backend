@@ -133,4 +133,49 @@ describe('Petreon routes', () => {
     });
   });
 
+  it('deletes a post', async() => {
+    const agent = request.agent(app);
+
+    const lassie = await User
+    .insert({
+      userName: 'lassie',
+      firstName: 'dave',
+      lastName: 'whatev',
+      profilePicture: 'hiho.jpg',
+      profileDescription: 'i like dogs'
+    });
+
+    const ed = await Pet
+    .create({
+      userId: `${lassie.id}`,
+      petName: 'edward',
+      type: 'bird',
+      petProfilePicture: 'bird.png',
+      petProfileDescription: 'i am iron bird',
+      bannerPicture: 'bird2.png'
+    });
+
+    await Post
+    .insert({
+        petId: `${ed.id}`,
+        pictureUrl: 'edsocute.jpg',
+        postText: 'ed so cute'
+    });
+
+    return await agent
+      .delete(`/api/v1/posts/1`)
+
+      .then(res => {
+          expect(res.body).toEqual({
+            id: expect.any(String),
+            petId: expect.any(String),
+            postTime: expect.any(String),
+            pictureUrl: 'edsocute.jpg',
+            videoUrl: null,
+            postText: 'ed so cute',
+            likes: '0'
+          })
+      })
+  })
+
 });
