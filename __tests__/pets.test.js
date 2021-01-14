@@ -46,6 +46,18 @@ describe('Petreon routes', () => {
             petProfileDescription: 'dingo ate a baby',
             bannerPicture: 'dingo2.jpg'
           })
-      })
+      });
+  });
+
+  it('returns all pets', async() => {
+    await pool.query(fs.readFileSync('./__tests__/petsTest.sql', 'utf-8'));
+    const agent = request.agent(app);
+    const pets = await Pet
+      .find();
+
+    const res = await agent
+      .get('/api/v1/pets')
+
+    expect(res.body).toEqual(pets)
   })
 });
