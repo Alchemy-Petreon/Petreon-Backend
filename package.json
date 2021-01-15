@@ -28,6 +28,10 @@
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
+<<<<<<< HEAD
+=======
+    "cors": "^2.8.5",
+>>>>>>> 4e72b6cdc08389de3650bb4961d8f616027d7edc
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
