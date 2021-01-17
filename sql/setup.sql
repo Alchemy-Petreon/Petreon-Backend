@@ -10,7 +10,7 @@ CREATE TABLE users (
     first_name TEXT NOT NULL,
     email TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
-    profile_picture TEXT NOT NULL,
+    profile_picture TEXT,
     profile_description TEXT NOT NULL,
     likes BIGINT
 );
