@@ -21,7 +21,7 @@ CREATE TABLE pets (
     pet_name TEXT NOT NULL,
     type TEXT NOT NULL,
     account_created TIMESTAMP NOT NULL,
-    profile_picture TEXT NOT NULL,
+    profile_picture TEXT,
     profile_description TEXT NOT NULL,
     banner_picture TEXT NOT NULL
 );
