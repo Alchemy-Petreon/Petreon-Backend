@@ -6,8 +6,12 @@ const User = require('../lib/models/User');
 const { agent } = require('superagent');
 
 describe('Petreon routes', () => {
+  const agent = request.agent(app);
+
   beforeEach(() => {
-    return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
+    return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'))
+      .then(agent.get('/api/v1/auth/test'));
+
   });
 
   afterAll(() => {
@@ -15,7 +19,7 @@ describe('Petreon routes', () => {
   });
 
   it('adds a user', async () => {
-    return request(app)
+    return agent
       .post('/api/v1/users')
       .send({
         userName: 'KittenMittens',
@@ -40,7 +44,6 @@ describe('Petreon routes', () => {
 
   it('returns all users', async () => {
     await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
-    const agent = request.agent(app);
     const users = await User
       .find();
 
@@ -52,7 +55,6 @@ describe('Petreon routes', () => {
 
   it('returns a user by id', async () => {
     await pool.query(fs.readFileSync('./__tests__/usersTest.sql', 'utf-8'));
-    const agent = request.agent(app);
 
     const res = await agent
       .get('/api/v1/users/2')
@@ -71,7 +73,6 @@ describe('Petreon routes', () => {
   })
 
   it('updates a user', async () => {
-    const agent = request.agent(app);
 
     const lassie = await User
       .insert({
@@ -105,7 +106,6 @@ describe('Petreon routes', () => {
   });
 
   it('deletes a user', async () => {
-    const agent = request.agent(app);
 
     const lassie = await User
       .insert({
