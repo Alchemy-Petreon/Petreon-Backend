@@ -36,8 +36,8 @@ CREATE TABLE posts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pet_id BIGINT REFERENCES pets(id),
     post_time TIMESTAMP NOT NULL,
-    picture_url TEXT,
-    video_url TEXT,
+    media_url TEXT,
+    media_type TEXT,
     post_text TEXT,
     likes BIGINT
 );
