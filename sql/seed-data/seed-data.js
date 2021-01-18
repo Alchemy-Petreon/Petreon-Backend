@@ -1,13 +1,13 @@
 const petArray = [{
     petName: 'KeyboardCat',
     type: 'cat',
-    profilePicture: 'http://placekitten.com/200/200',
-    profileDescription: 'where the wet food at?'
+    petProfilePicture: 'http://placekitten.com/200/200',
+    petProfileDescription: 'where the wet food at?'
 }, {
     petName: 'Maru',
     type: 'also cat',
-    profilePicture: 'http://placekitten.com/250/250',
-    profileDescription: "I'm just here for the pussy"
+    petProfilePicture: 'http://placekitten.com/250/250',
+    petProfileDescription: "I'm just here for the pussy"
 }]
 
 const postArray = [{
