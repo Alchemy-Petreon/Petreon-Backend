@@ -6,7 +6,7 @@ const petArray = [{
     bannerPicture: 'http://placekitten.com/800/200'
 }, {
     petName: 'Maru',
-    type: 'also cat',
+    type: 'cat',
     petProfilePicture: 'http://placekitten.com/250/250',
     petProfileDescription: "I'm just here for the pussy",
     bannerPicture: 'http://placekitten.com/900/200'
