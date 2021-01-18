@@ -20,3 +20,5 @@ export const postArray = [{
     pictureUrl: 'https://place-puppy.com/150x150',
     postText: 'Check this bitch'
 }]
+
+module.exports = { petArray, postArray }
