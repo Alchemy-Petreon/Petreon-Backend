@@ -1,4 +1,4 @@
-export const petArray = [{
+const petArray = [{
     petName: 'KeyboardCat',
     type: 'cat',
     profilePicture: 'http://placekitten.com/200/200',
@@ -10,7 +10,7 @@ export const petArray = [{
     profileDescription: "I'm just here for the pussy"
 }]
 
-export const postArray = [{
+const postArray = [{
     pictureUrl: 'http://placekitten.com/100/100',
     postText: '#blessed'
 }, {
