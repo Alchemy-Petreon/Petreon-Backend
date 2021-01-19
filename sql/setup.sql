@@ -35,6 +35,7 @@ CREATE TABLE subscriptions (
 CREATE TABLE posts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pet_id BIGINT REFERENCES pets(id),
+    user_id BIGINT REFERENCES users(id),
     post_time TIMESTAMP NOT NULL,
     media_url TEXT,
     media_type TEXT,
