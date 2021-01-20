@@ -13,7 +13,6 @@ CREATE TABLE users (
     profile_picture TEXT,
     profile_description TEXT NOT NULL,
     venmo TEXT,
-    likes BIGINT
 );
 
 CREATE TABLE pets (
