@@ -9,7 +9,7 @@ CREATE TABLE users (
     user_name TEXT NOT NULL,
     first_name TEXT NOT NULL,
     email TEXT NOT NULL,
-    account_created TIMESTAMP NOT NULL,
+    account_created TEXT NOT NULL,
     profile_picture TEXT,
     profile_description TEXT NOT NULL,
     likes BIGINT
@@ -20,7 +20,7 @@ CREATE TABLE pets (
     user_id BIGINT REFERENCES users(id),
     pet_name TEXT NOT NULL,
     type TEXT NOT NULL,
-    account_created TIMESTAMP NOT NULL,
+    account_created TEXT NOT NULL,
     profile_picture TEXT,
     profile_description TEXT NOT NULL,
     banner_picture TEXT NOT NULL
@@ -36,7 +36,7 @@ CREATE TABLE posts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pet_id BIGINT REFERENCES pets(id),
     user_id BIGINT REFERENCES users(id),
-    post_time TIMESTAMP NOT NULL,
+    post_time TEXT NOT NULL,
     media_url TEXT,
     media_type TEXT,
     post_text TEXT,
@@ -48,5 +48,5 @@ CREATE TABLE comments (
     user_id BIGINT REFERENCES users(id),
     post_id BIGINT REFERENCES posts(id),
     text TEXT NOT NULL,
-    timestamp TIMESTAMP NOT NULL
+    timestamp TEXT NOT NULL
 );
