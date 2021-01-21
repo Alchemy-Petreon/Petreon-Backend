@@ -39,8 +39,7 @@ CREATE TABLE posts (
     post_time TEXT NOT NULL,
     media_url TEXT,
     media_type TEXT,
-    post_text TEXT,
-    likes BIGINT
+    post_text TEXT
 );
 
 CREATE TABLE comments (
