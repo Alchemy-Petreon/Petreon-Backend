@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS pets CASCADE;
 DROP TABLE IF EXISTS subscriptions CASCADE;
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS likes;
 
 CREATE TABLE users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -12,7 +13,7 @@ CREATE TABLE users (
     account_created TEXT NOT NULL,
     profile_picture TEXT,
     profile_description TEXT NOT NULL,
-    venmo TEXT,
+    venmo TEXT
 );
 
 CREATE TABLE pets (
@@ -22,8 +23,7 @@ CREATE TABLE pets (
     type TEXT NOT NULL,
     account_created TEXT NOT NULL,
     profile_picture TEXT,
-    profile_description TEXT NOT NULL,
-    banner_picture TEXT NOT NULL
+    profile_description TEXT NOT NULL
 );
 
 CREATE TABLE subscriptions (
