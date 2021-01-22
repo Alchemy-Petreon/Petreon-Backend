@@ -38,6 +38,7 @@
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
     "pg": "^8.5.1",
+    "timezone": "^1.0.23",
     "uuid": "^8.3.2"
   }
 }
